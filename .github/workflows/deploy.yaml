@@ -26,6 +26,6 @@ jobs:
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: flask-supu-app2
-          region:  asia-northeast1
+          region:  asia-southeast1
           source:  .
 
