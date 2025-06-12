@@ -4,4 +4,4 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return "自動デプロイされたサプーのAPIだよ!"
+    return "自動デプロイされたサプーのAPIだよ!!"
