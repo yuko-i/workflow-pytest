@@ -22,7 +22,7 @@ jobs:
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.SERVICE_ACCOUNT_EMAIL }}
 
-      - id: deploy
+      - name: deploy
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: flask-supu-app
