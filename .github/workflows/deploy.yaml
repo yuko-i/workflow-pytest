@@ -22,11 +22,23 @@ jobs:
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.SERVICE_ACCOUNT_EMAIL }}
 
-      - name: deploy
-        uses: google-github-actions/deploy-cloudrun@v2
+      - name: Configure Docker for Artifact Registry
+        run: |
+          gcloud auth configure-docker asia-northeast1-docker.pkg.dev
+
+      - name: Build Docker image
+        run: |
+          docker build -t asia-northeast1-docker.pkg.dev/buoyant-airport-162001/github-actions-test/flask-supu-app .
+
+      - name: Push Docker image
+        run: |
+          docker push asia-northeast1-docker.pkg.dev/buoyant-airport-162001/github-actions-test/flask-supu-app
+
+      - name: Deploy to Cloud Run
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v0
         with:
           service: flask-supu-app
-          region:  asia-northeast1
-          source:  .
-          flags: --image=asia-northeast1-docker.pkg.dev/buoyant-airport-162001/github-actions-test/flask-supu-app
-
+          region: asia-northeast1
+          image: asia-northeast1-docker.pkg.dev/buoyant-airport-162001/github-actions-test/flask-supu-app
+          
