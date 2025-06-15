@@ -35,7 +35,6 @@ jobs:
           docker push asia-northeast1-docker.pkg.dev/buoyant-airport-162001/github-actions-test/flask-supu-app:${{ github.sha }}
 
       - name: Deploy to Cloud Run
-        id: deploy
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: flask-supu-app
